@@ -1,0 +1,12 @@
+.gitignore
+node_modules/
+.env
+.env.local
+.env.*
+logs/
+reports/
+leads/
+coverage/
+.DS_Store
+*.log
+npm-debug.log*

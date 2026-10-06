@@ -1,0 +1,22 @@
+{
+  "name": "youtube-gold-pro",
+  "version": "2.0.0",
+  "description": "Advanced YouTube automation dashboard with human-like browsing, lead collection, and report export",
+  "main": "main.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "app": "electron .",
+    "web": "node src/server.js",
+    "test": "node --check src/server.js && node --check src/index.js && node --check src/config.js && node --check src/reportManager.js && node --check src/leadsManager.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0",
+    "express": "^4.19.2",
+    "express-basic-auth": "^1.2.0",
+    "playwright": "^1.49.1"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}
