@@ -3,11 +3,16 @@
   "version": "2.0.0",
   "description": "Advanced YouTube automation dashboard with human-like browsing, lead collection, and report export",
   "main": "main.js",
+  "homepage": "./",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node src/server.js",
     "app": "electron .",
     "web": "node src/server.js",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
     "test": "node --check src/server.js && node --check src/index.js && node --check src/config.js && node --check src/reportManager.js && node --check src/leadsManager.js"
   },
   "dependencies": {
@@ -17,6 +22,56 @@
     "playwright": "^1.49.1"
   },
   "devDependencies": {
-    "electron": "^31.0.0"
+    "electron": "^31.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.youtubegoldpro.app",
+    "productName": "YouTube Gold Pro",
+    "files": [
+      "main.js",
+      "preload.js",
+      "public/**/*",
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        "portable"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "assets/icon.png",
+      "category": "Utility"
+    }
   }
 }
