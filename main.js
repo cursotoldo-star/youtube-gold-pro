@@ -1,11 +1,16 @@
 const { app, BrowserWindow, Menu } = require('electron');
+const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
-const isDev = require('electron-is-dev');
 
 let mainWindow;
 let serverProcess;
 const PORT = 3000;
+
+function getIconPath() {
+  const candidate = path.join(__dirname, 'assets', 'icon.png');
+  return fs.existsSync(candidate) ? candidate : null;
+}
 
 function startServer() {
   return new Promise((resolve) => {
@@ -38,12 +43,14 @@ function startServer() {
 }
 
 function createWindow() {
+  const iconPath = getIconPath();
+
   mainWindow = new BrowserWindow({
     width: 1400,
     height: 960,
     minWidth: 1150,
     minHeight: 780,
-    icon: path.join(__dirname, 'assets/icon.png'),
+    icon: iconPath || undefined,
     backgroundColor: '#0b1020',
     title: 'YouTube Gold Pro',
     autoHideMenuBar: false,
@@ -76,9 +83,7 @@ function createMenu() {
   const template = [
     {
       label: 'Arquivo',
-      submenu: [
-        { role: 'quit', label: 'Sair' }
-      ]
+      submenu: [{ role: 'quit', label: 'Sair' }]
     },
     {
       label: 'Editar',
